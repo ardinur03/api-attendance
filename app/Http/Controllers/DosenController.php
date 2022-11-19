@@ -30,13 +30,16 @@ class DosenController extends Controller
         // }
 
         // return DosenMengajarResource::collection($jadwal);
-
         $data = DB::table('jadwal')
             ->join('dosen_mengajar', 'jadwal.dosen_mengajar_id', '=', 'dosen_mengajar.id')
             ->join('dosen', 'dosen_mengajar.dosen_id', '=', 'dosen.id')
             ->join('mata_kuliah', 'jadwal.mata_kuliah_kode', '=', 'mata_kuliah.kode_mata_kuliah')
+            ->join('kelas', 'jadwal.kelas_kode', '=', 'kelas.kode_kelas')
+            ->join('prodi', 'kelas.prodi_kode', '=', 'prodi.kode_prodi')
             ->select(
                 'dosen.*',
+                'prodi.*',
+                'kelas.*',
                 'jadwal.*',
                 'mata_kuliah.nama_mata_kuliah',
                 'dosen_mengajar.jenis_mata_kuliah',
@@ -57,7 +60,7 @@ class DosenController extends Controller
                 'nip' => $data[0]->nip,
                 'nama_dosen' => $data[0]->nama_dosen,
             ],
-            'data' => DosenMengajarResource::collection($data),
+            'data_jadwal' => DosenMengajarResource::collection($data),
         ], 200);
     }
 }
