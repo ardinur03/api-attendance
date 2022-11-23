@@ -25,4 +25,9 @@ class DosenMengajar extends Model
     {
         return $this->belongsTo(MataKuliah::class, 'mata_kuliah_kode');
     }
+
+    public function dosen()
+    {
+        return $this->belongsTo(Dosen::class);
+    }
 }

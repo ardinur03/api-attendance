@@ -15,6 +15,8 @@ class Jurusan extends Model implements AuthenticatableContract, AuthorizableCont
 
     protected $table = 'jurusan';
 
+    protected $primarykey = 'jurusan_kode';
+
     /**
      * The attributes that are mass assignable.
      *
