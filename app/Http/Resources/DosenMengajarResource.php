@@ -22,8 +22,10 @@ class DosenMengajarResource extends JsonResource
         // ];
 
         return [
+            'nama_kelas' => $this->nama_kelas . ' - '. $this->nama_prodi,
             'mata_kuliah' => $this->nama_mata_kuliah,
             'jenis_mata_kuliah' => $this->jenis_mata_kuliah,
+            'kode_kelas' => $this->kelas_kode,
             'kode_jadwal' => $this->kode_jadwal,
             'kode_mata_kuliah' => $this->mata_kuliah_kode,
             'kode_kelas' => $this->kelas_kode,
@@ -33,6 +35,7 @@ class DosenMengajarResource extends JsonResource
             'tanggal' => $this->tanggal,
             'jam_mulai' => $this->jam_mulai,
             'jam_selesai' => $this->jam_selesai,
+            'ruangan' => $this->ruangan,
         ];
     }
 }

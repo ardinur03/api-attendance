@@ -38,11 +38,11 @@ class Jadwal extends Model implements AuthenticatableContract, AuthorizableContr
 
     public function kelas()
     {
-        return $this->belongsTo(Kelas::class, 'kelas_kode');
+        return $this->belongsTo(Kelas::class, 'kelas_kode', 'kode_kelas');
     }
 
     public function mata_kuliah()
     {
-        return $this->belongsTo(MataKuliah::class, 'mata_kuliah_kode');
+        return $this->belongsTo(MataKuliah::class, 'mata_kuliah_kode', 'kode_mata_kuliah');
     }
 }

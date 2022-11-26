@@ -38,9 +38,9 @@ class DosenController extends Controller
             ->join('prodi', 'kelas.prodi_kode', '=', 'prodi.kode_prodi')
             ->select(
                 'dosen.*',
-                'prodi.*',
-                'kelas.*',
+                'kelas.nama_kelas',
                 'jadwal.*',
+                'prodi.nama_prodi',
                 'mata_kuliah.nama_mata_kuliah',
                 'dosen_mengajar.jenis_mata_kuliah',
             )->where('dosen_mengajar.dosen_id', auth()->user()->dosen()->first()->id)
@@ -50,6 +50,7 @@ class DosenController extends Controller
         if (count($data) == 0) {
             return response()->json([
                 'message' => 'Tidak ada jadwal hari ini',
+                'data' => []
             ], 404);
         }
 

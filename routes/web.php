@@ -27,14 +27,22 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->post('me', 'AuthController@me');
     });
 
-    $router->group(['prefix' => 'dosen'], function () use ($router) {
+    $router->group(['middleware'=>'auth.jwt', 'prefix' => 'dosen'], function () use ($router) {
         $router->get('/', 'DosenController@index');
         $router->get('/jadwal-dosen-hari-ini', 'DosenController@JadwalDosenHariIni');
-        $router->post('/', 'DosenController@store');
-        $router->put('/{id}', 'DosenController@update');
-        $router->delete('/{id}', 'DosenController@destroy');
+        // $router->post('/', 'DosenController@store');
+        // $router->put('/{id}', 'DosenController@update');
+        // $router->delete('/{id}', 'DosenController@destroy');
     });
 
-    $router->post('dosen/mengajar', 'AuthController@dosenMengajar');
+    $router->group(['middleware'=>'auth.jwt', 'prefix' => 'jadwal'], function () use ($router) {
+        $router->get('show/{kode}', 'JadwalController@show');
+    });
+
+    $router->group(['middleware'=>'auth.jwt', 'prefix' => 'mahasiswa'], function () use ($router) {
+        $router->get('list/{kelas}', 'MahasiswaController@list');
+    });
+
+    // $router->post('dosen/mengajar', 'AuthController@dosenMengajar');
     $router->get('me', ['middleware' => 'auth.jwt', 'uses' => 'AuthController@me']);
 });
