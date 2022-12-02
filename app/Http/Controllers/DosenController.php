@@ -30,7 +30,6 @@ class DosenController extends Controller
         // }
 
         // return DosenMengajarResource::collection($jadwal);
-
         $data = DB::table('jadwal')
             ->join('dosen_mengajar', 'jadwal.dosen_mengajar_id', '=', 'dosen_mengajar.id')
             ->join('dosen', 'dosen_mengajar.dosen_id', '=', 'dosen.id')
@@ -62,7 +61,7 @@ class DosenController extends Controller
                 'nip' => $data[0]->nip,
                 'nama_dosen' => $data[0]->nama_dosen,
             ],
-            'data' => DosenMengajarResource::collection($data),
+            'data_jadwal' => DosenMengajarResource::collection($data),
         ], 200);
     }
 }
